@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANUBS — Cinematic Interface</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="particles-bg" id="particles"></div>
+
+  <div class="scene">
+    <div class="entity" id="entity">
+      <div class="entity-glow" id="entityGlow"></div>
+      <div class="entity-core" id="entityCore">
+        <span class="text-content" id="textContent"></span>
+
+        <div class="thinking-content" id="thinkingContent">
+          <div class="bubble-body">
+            <span class="bubble-text">Thinking...</span>
+          </div>
+          <div class="bubble-tail">
+            <div class="tail-dot"></div>
+            <div class="tail-dot"></div>
+            <div class="tail-dot"></div>
+          </div>
+        </div>
+
+        <div class="speaking-content" id="speakingContent">
+          <div class="wave-bar" style="--i:0"></div>
+          <div class="wave-bar" style="--i:1"></div>
+          <div class="wave-bar" style="--i:2"></div>
+          <div class="wave-bar" style="--i:3"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ambient-ring" id="ambientRing"></div>
+  </div>
+
+  <button class="exit-btn" id="exitBtn" title="Exit">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M18 6L6 18M6 6l12 12"/>
+    </svg>
+  </button>
+
+  <script src="app.js"></script>
+  <!-- زرار الخروج المخفي -->
+    <button class="exit-btn" id="exitBtn" title="Exit">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+
+  <script src="app.js"></script>
+</body>
+</html>

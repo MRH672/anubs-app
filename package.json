@@ -1,0 +1,13 @@
+{
+  "name": "anubs-cinematic",
+  "version": "1.0.0",
+  "description": "Cinematic Electron Interface with Morphing Effects",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0"
+  }
+}
