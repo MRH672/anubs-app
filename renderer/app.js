@@ -100,7 +100,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.electronAPI.closeWindow();
   });
 });
-// ===== زرار الخروج =====
-document.getElementById('exitBtn').addEventListener('click', () => {
-  window.electronAPI.closeWindow();
-});
+
