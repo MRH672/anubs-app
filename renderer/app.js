@@ -9,12 +9,15 @@ class CinematicMorph {
     this.ring = document.getElementById('ambientRing');
     this.particles = document.getElementById('particles');
 
+    this.isRunning = true;
+    this.particleElements = [];
+
     this.initParticles();
     this.startIntro();
   }
 
   initParticles() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 30; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
       p.style.left = Math.random() * 100 + '%';
@@ -22,7 +25,13 @@ class CinematicMorph {
       p.style.animationDelay = Math.random() * 10 + 's';
       p.style.animationDuration = (8 + Math.random() * 8) + 's';
       this.particles.appendChild(p);
+      this.particleElements.push(p);
     }
+  }
+
+  cleanupParticles() {
+    this.particleElements.forEach(p => p.remove());
+    this.particleElements = [];
   }
 
   wait(ms) {
@@ -73,31 +82,50 @@ class CinematicMorph {
   }
 
   async mainLoop() {
-    while (true) {
+    while (this.isRunning) {
       this.setMode('orb');
       await this.wait(3000);
 
+      if (!this.isRunning) break;
       this.triggerMorph();
       await this.wait(400);
       this.setMode('thinking');
       await this.wait(3500);
 
+      if (!this.isRunning) break;
       this.triggerMorph();
       await this.wait(400);
       this.setMode('speaking');
       await this.wait(3500);
 
+      if (!this.isRunning) break;
       this.triggerMorph();
       await this.wait(400);
     }
   }
+
+  destroy() {
+    this.isRunning = false;
+    this.cleanupParticles();
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  new CinematicMorph();
+  const morph = new CinematicMorph();
 
-  document.getElementById('exitBtn').addEventListener('click', () => {
-    window.electronAPI.closeWindow();
+  const exitBtn = document.getElementById('exitBtn');
+  if (exitBtn) {
+    exitBtn.addEventListener('click', () => {
+      if (window.electronAPI && typeof window.electronAPI.closeWindow === 'function') {
+        window.electronAPI.closeWindow();
+      } else {
+        console.warn('electronAPI not available - running in browser mode');
+        window.close();
+      }
+    });
+  }
+
+  window.addEventListener('beforeunload', () => {
+    morph.destroy();
   });
 });
-

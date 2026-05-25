@@ -349,7 +349,6 @@ body {
   0%, 100% { transform: scale(1) rotate(0deg); }
   25% { transform: scale(0.95) rotate(-1deg); }
   75% { transform: scale(1.02) rotate(1deg); }
-
 }
 
 /* ===== زرار الخروج المخفي ===== */
@@ -392,10 +391,4 @@ body {
 .exit-btn:hover svg {
   color: #fff;
   transform: rotate(90deg);
-}
-
-/* يختفي تماماً لما الماوس بعيد عن الزاوية العلوية */
-body:not(:hover) .exit-btn {
-  opacity: 0;
-  pointer-events: none;
 }

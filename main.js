@@ -3,7 +3,7 @@ const path = require('path');
 
 let mainWindow;
 
-app.whenReady().then(() => {
+function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1920,
     height: 1080,
@@ -21,17 +21,26 @@ app.whenReady().then(() => {
   });
 
   mainWindow.loadFile(path.join(__dirname, 'renderer', 'index.html'));
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
+}
+
+app.whenReady().then(() => {
+  createWindow();
 });
 
-// ← أضف ده هنا
 ipcMain.on('window-close', () => {
   if (mainWindow) mainWindow.close();
 });
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
-});
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
   }
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
 });
